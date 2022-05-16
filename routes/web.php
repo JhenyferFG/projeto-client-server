@@ -18,5 +18,7 @@ Route::get('/', function () {
 Route::get('/api/usuario/teste', function () {
     return view('login');
 });
-Route::post('/api/usuario/login', 'UsuarioController@show');
+Route::post('/api/usuario/login', 'UsuarioController@login');
 Route::post('/api/usuario/cadastro', 'UsuarioController@store');
+Route::post('/api/usuario/logout', 'UsuarioController@logout');
+

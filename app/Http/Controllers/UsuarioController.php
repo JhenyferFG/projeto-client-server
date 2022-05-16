@@ -37,7 +37,7 @@ class UsuarioController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function show(Request $request)
+    public function login(Request $request)
     {
         $usuario =  Usuario::where('cpfcnpj', $request->input('cpfcnpj'))->where('senha', $request->input('senha'))->first();
         if(!empty($usuario)){
@@ -48,6 +48,12 @@ class UsuarioController extends Controller
         
 
     }
+
+    public function logout(Request $request)
+    {
+        return 'Logout efetuado com sucesso!';
+    }
+
 
     /**
      * Update the specified resource in storage.
