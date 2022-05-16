@@ -17,3 +17,13 @@ use Illuminate\Support\Facades\View;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('/api/usuario/teste', function () {
+    return view('login');
+});
+Route::post('/api/usuario/login', 'UsuarioController@show');
+Route::post('/api/usuario/cadastro', 'UsuarioController@store');

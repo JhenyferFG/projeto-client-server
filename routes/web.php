@@ -15,5 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/api/usuario/teste', function () {
+    return view('login');
+});
 Route::post('/api/usuario/login', 'UsuarioController@show');
 Route::post('/api/usuario/cadastro', 'UsuarioController@store');
