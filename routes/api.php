@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\View;
+// use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,16 +14,16 @@ use Illuminate\Support\Facades\View;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Route::get('/api/usuario/teste', function () {
-    return view('login');
-});
-Route::post('/api/usuario/login', 'UsuarioController@show');
-Route::post('/api/usuario/cadastro', 'UsuarioController@store');
+// Route::get('/api/usuario/teste', function () {
+//     return view('login');
+// });
+// Route::post('/api/usuario/login', 'UsuarioController@show');
+// Route::post('/api/usuario/cadastro', 'UsuarioController@store');

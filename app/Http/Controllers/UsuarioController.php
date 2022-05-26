@@ -8,6 +8,7 @@ use App\Models\Usuario;
 
 class UsuarioController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -26,32 +27,51 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        Usuario::create($request->all());
-        return 'Cadastro efetuado com sucesso!';
+        if(!empty($request->input('senha')) && !empty($request->input('nome')) && !empty($request->input('cpfcnpj'))){
+            Usuario::create($request->all());
+            $return = ['message' => 'Cadastro efetuado com sucesso!'];
+            return json_encode($return);
+        }else{
+            $return = ['message' => 'Erro no cadastro.'];
+            return response( json_encode($return), 400);
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $cpfcnpj
      * @return \Illuminate\Http\Response
      */
 
     public function login(Request $request)
     {
+        
+        header('Content-Type: application/json;charset=utf-8');
         $usuario =  Usuario::where('cpfcnpj', $request->input('cpfcnpj'))->where('senha', $request->input('senha'))->first();
         if(!empty($usuario)){
-            return 'Login efetuado com sucesso!';
+            $return = ['message' => 'Login Efetuado com Sucesso!'];
+            return json_encode($return);
         }else{
-            return 'Erro de login';
+            $return = ['message' => 'Erro de login.'];
+            return response( json_encode($return), 400);
+            
         }
-        
 
     }
 
-    public function logout(Request $request)
+    public function logout($cpfcnpj)
     {
-        return 'Logout efetuado com sucesso!';
+        header('Content-Type: application/json;charset=utf-8');
+        // $usuario =  Usuario::where('cpfcnpj', '39324090003');
+        $usuario =  Usuario::where('cpfcnpj', $cpfcnpj);
+        if(!empty($usuario)){
+            $return = ['message' => 'Logout Efetuado com Sucesso!'];
+            return json_encode($return);
+        }else{
+            $return = ['message' => 'Erro de logout.'];
+            return response( json_encode($return), 400);
+        }
     }
 
 
@@ -59,12 +79,12 @@ class UsuarioController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  $cpfcnpj
      * @return \Illuminate\Http\Response
      */
-    public function update($id, Request $request)
+    public function update($cpfcnpj, Request $request)
     {
-        $usuario = Usuario::where('id', $id)->first();
+        $usuario = Usuario::where('cpfcnpj', $cpfcnpj)->first();
         if(!empty($usuario)){
             $usuario->update($request->all());
             return 'Usuario atualizado.';
@@ -76,12 +96,12 @@ class UsuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  $cpfcnpj
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($cpfcnpj)
     {
-        $usuario = Usuario::where('id', $id)->first();
+        $usuario = Usuario::where('cpfcnpj', $cpfcnpj)->first();
         if(!empty($usuario)){
             $usuario->delete();
             return 'Usuario excluído com sucesso.';
